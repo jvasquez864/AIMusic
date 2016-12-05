@@ -15,7 +15,6 @@ public class AIMusicMain {
         //create new Player
 
         Player musicPlayer = new Player();
-
     }
 
     //Saves the list of music as a .csv file
