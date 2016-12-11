@@ -1,8 +1,8 @@
 import org.jfugue.pattern.Pattern;
 
 //Helper class to pair patterns with our respective ratings for them
-public class PatternAndRating {
-    private Pattern pattern;
+public class PatternAndRating implements Comparable<PatternAndRating>{
+    public Pattern pattern;
     public int rating;
 
     public PatternAndRating(String pattern, int rating){
@@ -10,7 +10,14 @@ public class PatternAndRating {
         this.rating = rating;
     }
 
-    public Pattern getPattern(){
-        return pattern;
+    //copy constructor
+    public PatternAndRating(PatternAndRating copy){
+        this.pattern = new Pattern(copy.pattern);
+        this.rating = copy.rating;
+    }
+
+    public int compareTo(PatternAndRating comparisonPattern){
+        //ascending order
+        return this.rating - comparisonPattern.rating;
     }
 }
