@@ -13,7 +13,6 @@ import java.util.List;
 public class AIMusicMain {
     public static void main(String[] args){
         //create new Player
-
         Player musicPlayer = new Player();
 
     }
@@ -27,8 +26,9 @@ public class AIMusicMain {
 
             //Add each piece of music as a new line
             for(Pattern musicPiece : musicList){
-                file.println(musicPiece);
+                file.println(musicPiece.toString());
             }
+            file.close();
         }
         catch(IOException e)
         {
