@@ -17,7 +17,7 @@ public class AIMusicMain {
 
     }
 
-    //Saves the list of music as a .csv file
+    //Saves the list of music as a .txt file
     public static void saveEvolvedMusic(List<Pattern> musicList)
     {
         try {
