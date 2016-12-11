@@ -1,3 +1,6 @@
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
 
@@ -10,11 +13,16 @@ import java.util.List;
 
 
 
-public class AIMusicMain {
+public class AIMusicMain extends Application{
     public static void main(String[] args){
+        launch(args);
+
+    }
+    public void start(Stage primaryStage){
         //create new Player
         Player musicPlayer = new Player();
 
+        primaryStage.show();
     }
 
     //Saves the list of music as a .txt file
