@@ -21,7 +21,7 @@ public class AIMusicMain extends Application{
     public void start(Stage primaryStage){
         //create new Player
         Player musicPlayer = new Player();
-
+        
         primaryStage.show();
     }
 
