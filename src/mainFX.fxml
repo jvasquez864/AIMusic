@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="430.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
+   <children>
+      <Button id="newB" fx:id="newB" layoutX="512.0" layoutY="38.0" mnemonicParsing="false" text="New Music" />
+      <Button id="load" fx:id="load" layoutX="503.0" layoutY="78.0" mnemonicParsing="false" text="Load From File" />
+      <Button id="save" fx:id="save" layoutX="510.0" layoutY="120.0" mnemonicParsing="false" text="Save To File" />
+      <ChoiceBox id="rate1" fx:id="rate1" layoutX="523.0" layoutY="182.0" prefHeight="25.0" prefWidth="52.0" />
+      <ChoiceBox id="rate3" fx:id="rate3" layoutX="523.0" layoutY="253.0" prefHeight="25.0" prefWidth="52.0" />
+      <ChoiceBox id="rate2" fx:id="rate2" layoutX="523.0" layoutY="215.0" prefHeight="25.0" prefWidth="52.0" />
+      <Button id="submit" fx:id="submit" layoutX="504.0" layoutY="311.0" mnemonicParsing="false" text="Submit Rating" />
+      <Button id="muLambda" fx:id="muLambda" layoutX="493.0" layoutY="350.0" mnemonicParsing="false" text="Evolve MuLambda" />
+      <Button id="play" fx:id="play" layoutX="52.0" layoutY="382.0" mnemonicParsing="false" text="Play" />
+      <ListView id="table" fx:id="table" layoutX="20.0" layoutY="14.0" prefHeight="361.0" prefWidth="446.0" />
+      <Button id="crossOver" fx:id="crossOver" layoutX="495.0" layoutY="382.0" mnemonicParsing="false" text="Evolve CrossOver" />
+   </children>
+</AnchorPane>
