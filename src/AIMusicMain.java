@@ -1,10 +1,17 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,11 +25,29 @@ public class AIMusicMain extends Application{
         launch(args);
 
     }
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) throws IOException{
         //create new Player
         Player musicPlayer = new Player();
         
+        
+        
+        Parent root;
+        root = FXMLLoader.load(getClass().getResource("mainFX.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Test AIMUSIC");
         primaryStage.show();
+        
+        
+        
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(AIMusicMain.class.getResource("mainFX.fxml"));
+        loader.load();
+        MainController controller = loader.getController();
+        controller.setMain(this);
+        
+      
+        
     }
 
     //Saves the list of music as a .txt file
@@ -44,23 +69,4 @@ public class AIMusicMain extends Application{
         }
     }
 
-    //Returns an empty list if there was an error reading the file
-    public static List<Pattern> loadEvolvedMusic(){
-        List<Pattern> loadedMusic = new ArrayList<Pattern>();
-
-        try(BufferedReader fileReader = new BufferedReader( new FileReader("evolvedMusicPieces.txt"))){
-
-            String musicPiece = null;
-
-            while( (musicPiece = fileReader.readLine()) != null){
-                loadedMusic.add(new Pattern(musicPiece));
-            }
-
-            return loadedMusic;
-        }
-        catch (IOException e){
-            //If error reading file...
-        }
-        return loadedMusic;
-    }
 }
