@@ -164,6 +164,21 @@ public class MainController {
 		return new PatternAndRating(thePattern, -1);
 	}
 
+	public static String mutatePattern(PatternAndRating pattern) {
+		String thePattern = pattern.pattern.toString();
+		//Split by space to get each individual note
+		String[] thePatternAsArray = thePattern.split(" ");
+
+		Random rnd = new Random();
+
+		//Mutate 1/4 randomly selected notes
+		for (int amountOfNotes = 0; amountOfNotes < thePatternAsArray.length / 4; ++amountOfNotes) {
+			thePatternAsArray[rnd.nextInt(thePatternAsArray.length)] = MainController.createRandomPattern();
+		}
+
+		return thePatternAsArray.toString();
+	}
+
 	//Creates a random single pattern, I.E "Cq"
 	public static String createRandomPattern() {
 		String noteChordOrRest = getRandomTune();
