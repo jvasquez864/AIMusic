@@ -1,1 +1,10 @@
-Eh Dh Ch Eh Dh Ch Cq Cq Cq Cq Dq Dq Dq Dq Eh Dh Ch
+V0 I[Slap_Bass_1] Cmaj4h 90h 115q 32h 105h Ri Gmajw Rw Rq 54i   V1  I[Applause] 85w 73h 22h 38w 124i 37w 77h 48w 53w Cmaj0i ,-1
+V0 I[Overdriven_Guitar] 106q 39q Gmajq 68w 19h 114h Cmaj0h Gmajw 38w 98i   V1  I[Steel_Drums] 34i 86i Cmaj0i 14w Cmajw Cmaji Rh 65h 33i Rq ,-1
+V0 I[String_Ensemble_1] Ri 83i Ri 117h 120i Rh 74i Cmaji 118q 115q   V1  I[Synth_Drum] 116q 52i 99w 90h 25q Gmaji 100q 66w 16h 5q ,-1
+V0 I[Synth_Bass_2] 76i Cmajq 50w Gmajw Ri Cmaj7q Rh 92i 50h 14i   V1  I[Agogo] 61q 36i 54w 80h 85q 22w Rh 30w 107q 69q ,-1
+V0 I[Harpsichord] Rh 75h 27w Rh Rw 127w 111i 111h 4q Cmajw   V1  I[Gunshot] 48q 103q Rw 102h Rw Cmaj0i 86q 117i Cmaj0w 113h ,-1
+V0 I[New_Age] 98q 113h 80h Cmajq 48w 66h 37w 87w 53q 65h   V1  I[Bird_Tweet] 81h 35q 36q 3w 1q Cmaji 117w Cmaj0i 83q Cmaj0h ,-1
+V0 I[Skakuhachi] 38h Cmaj7q 15i Rq 121w 27w 28w 18q Rw Rw  I[Steel_Drums] Rh Cmaj0h 102h 83h Cmaji 19q 19h Rw 29q 18i ,-1
+V0 I[Bright_Acoustic] 27w 114w 118q 11i 88q Rq Cmaj0q 49w Rw 117w   V1  I[Bird_Tweet] 114h Gmajh 32h Cmajh 113q 52q 117i 105h 126h Cmaj0h ,-1
+V0 I[Piccolo] 25i Rq 77i 48w 111h 20q Cmaj7w 120q 105i 100i   V1  I[Steel_Drums] Cmaj0i Rw 96h Ri 92q 98w 118w 109h Cmaj7h 122q ,-1
+V0 I[Synth_Bass_1] 78w 66h Rw Gmajw 113h 109w 58h 19q 93h Gmajw   V1  I[Bird_Tweet] Cmaj7h Cmaj4h 84w Rq 21h 113q 39h 22h 44h Cmaj7h ,-1

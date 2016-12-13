@@ -43,8 +43,14 @@ public class NoteUtils {
         return crossOverString;
     }
     //mutates the 1/4 randomly selected notes in the pattern
-    public static String mutatePattern(PatternAndRating pattern) {
-        String thePattern = pattern.pattern.toString();
+    public static String mutateEntirePattern(PatternAndRating pattern) {
+        String melody = mutatePattern(pattern.pattern);
+        String percussion = mutatePattern(pattern.percussionPattern);
+        return melody + " " + percussion;
+    }
+
+    private static String mutatePattern(Pattern melodyPattern){
+        String thePattern = melodyPattern.toString();
         //Split by space to get each individual note
         String[] thePatternAsArray = thePattern.split(" ");
 
@@ -61,24 +67,41 @@ public class NoteUtils {
         }
         return mutatedPattern;
     }
-
     //Creates a random pattern of length 'patternLength'.  Pattern rating is initialized to -1
     private static PatternAndRating createRandomPatternAndRating(int patternLength) {
-        String thePattern = "";
-
+        String thePatternMelody = "";
+        String thePatternPercussion = "";
         for (int currentPatternLength = 0; currentPatternLength < patternLength; ++currentPatternLength) {
-            thePattern += createRandomPattern() + " ";
+            thePatternMelody += createRandomPattern() + " ";
+            thePatternPercussion += createRandomPattern() + " ";
         }
-        Pattern randomPattern = new Pattern(thePattern);
-        setPatternRandomInstrument(randomPattern);
+        Pattern randomPatternMelody = new Pattern(thePatternMelody);
+        Pattern randomPatternPercussion = new Pattern(thePatternPercussion);
 
-        return new PatternAndRating(thePattern, -1);
+
+
+        setPatternRandomInstrument(randomPatternMelody);
+        setPatternRandomPercussionInstrument(randomPatternPercussion);
+        Pattern randomPattern = new Pattern();
+
+        randomPattern.add(randomPatternMelody);
+        randomPattern.add(randomPatternPercussion);
+
+        return new PatternAndRating(randomPattern, -1);
     }
 
     private static void setPatternRandomInstrument(Pattern pattern){
         Random rnd = new Random();
         //Give voice 0 a random instrument that's not a percussion instrument
         pattern.setVoice(0).setInstrument(rnd.nextInt(112));
+    }
+
+    private static void setPatternRandomPercussionInstrument(Pattern pattern){
+        Random rnd = new Random();
+        //Get random number from [112-128) (these are the percussion instruments)
+        int randomInstrument = rnd.nextInt(16) + 112;
+        //Give voice 1 a random instrument that's a percussion instrument
+        pattern.setVoice(1).setInstrument(randomInstrument);
     }
 
 

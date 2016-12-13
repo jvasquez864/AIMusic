@@ -112,7 +112,7 @@ public class MainController {
 	                	
 	                	if(!listy.isEmpty())listy.clear();
 	                	for(int i = 0; i < listyyy.size();i++){
-	                   listy.add(listyyy.get(i).pattern);
+	                   listy.add(listyyy.get(i).getEntirePattern());
 	                	}
 	                }
 	                
@@ -139,7 +139,7 @@ public class MainController {
 			public void handle(final ActionEvent e){
 				
 				int index = table.getSelectionModel().getSelectedIndex();
-				Pattern playing = listyyy.get(index).pattern;
+				Pattern playing = listyyy.get(index).getEntirePattern();
 				Player musicPlayer = new Player();
 				musicPlayer.play(playing);
 				
@@ -162,11 +162,11 @@ public class MainController {
 			@Override
 			public void handle(final ActionEvent e){
 				
-				listyyy = new ArrayList<>(NoteUtils.initializeRandomPatterns(5, 10));
+				listyyy = new ArrayList<>(NoteUtils.initializeRandomPatterns(10, 10));
 				
 				if(!listy.isEmpty())listy.clear();
 				for(int i = 0; i < listyyy.size();i++){
-	                   listy.add(listyyy.get(i).pattern);
+	                   listy.add(listyyy.get(i).getEntirePattern());
 	                	}
 			}
 		});
@@ -194,7 +194,7 @@ public class MainController {
 					listyyy = new ArrayList<>(mul.evolvePatterns(qu));
 					if(!listy.isEmpty())listy.clear();
 					for(int i = 0; i < listyyy.size();i++){
-		                   listy.add(listyyy.get(i).pattern);
+		                   listy.add(listyyy.get(i).getEntirePattern());
 		                	}
 				}
 				else if(group.getSelectedToggle().getUserData().toString() == "genetic"){
@@ -202,7 +202,7 @@ public class MainController {
 					listyyy = ge.evolvePatterns(listyyy);
 					if(!listy.isEmpty())listy.clear();
 					for(int i = 0; i < listyyy.size();i++){
-		                   listy.add(listyyy.get(i).pattern);
+		                   listy.add(listyyy.get(i).getEntirePattern());
 		                	}
 				}
 			}
@@ -265,7 +265,7 @@ public class MainController {
 
             //Add each piece of music as a new line
             for(PatternAndRating musicPiece : musicList){
-                file.println(musicPiece.pattern.toString() + "," + musicPiece.rating);
+                file.println(musicPiece.getEntirePattern().toString() + "," + musicPiece.rating);
                
             }
             file.close();

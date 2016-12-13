@@ -13,7 +13,7 @@ public class GeneticEvolution {
 
         //Get random int from 0-99. If it's less than 5, mutate the child's genes (5% chance of mutation)
         childPattern = rnd.nextInt(100) < 5 ?
-                NoteUtils.mutatePattern(new PatternAndRating(childPattern, -1)) :
+                NoteUtils.mutateEntirePattern(new PatternAndRating(childPattern, -1)) :
                 childPattern;
         patterns.add(new PatternAndRating(childPattern, -1));
 
