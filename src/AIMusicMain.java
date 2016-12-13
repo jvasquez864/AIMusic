@@ -47,23 +47,6 @@ public class AIMusicMain extends Application{
         
     }
 
-    //Saves the list of music as a .txt file
-    public static void saveEvolvedMusic(List<Pattern> musicList)
-    {
-        try {
-            //NOTE: Overwrites the previously saved evolvedMusicPieces
-            PrintWriter file = new PrintWriter("evolvedMusicPieces.txt", "UTF-8");
-
-            //Add each piece of music as a new line
-            for(Pattern musicPiece : musicList){
-                file.println(musicPiece.toString());
-            }
-            file.close();
-        }
-        catch(IOException e)
-        {
-            //Show error message that save was not successful
-        }
-    }
+    
 
 }

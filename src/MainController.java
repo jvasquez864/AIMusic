@@ -2,11 +2,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 import Constants.Chords;
 import Constants.NoteDurations;
-import com.sun.deploy.util.ArrayUtil;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
 
@@ -19,6 +19,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -39,10 +41,13 @@ public class MainController {
 	private Button submit;
 
 	@FXML
-	private Button crossOVer;
+	private RadioButton muLambda;
+	
+	@FXML
+	private RadioButton genetic;
 
 	@FXML
-	private Button muLambda;
+	private Button evolve;
 
 	@FXML
 	private Button play;
@@ -57,7 +62,7 @@ public class MainController {
 	private ChoiceBox<Integer> rate3;
 
 	@FXML
-	private ListView<Pattern> table;
+	private ListView<String> table;
 
 	
 	public List<PatternAndRating> listyyy = new ArrayList<>();
@@ -69,11 +74,11 @@ public class MainController {
 	private void initialize(){
 		
 	
-		 ObservableList<Pattern> listy = FXCollections.observableArrayList();
+		 ObservableList<String> listy = FXCollections.observableArrayList();
 		 
 		
 		 
-		 listy.addListener(new ListChangeListener<Pattern>() {
+		 listy.addListener(new ListChangeListener<String>() {
 	            @Override
 	            public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
 	               
@@ -104,8 +109,10 @@ public class MainController {
 	                if (file != null) {
 	                	List<PatternAndRating> x = loadEvolvedMusic(file);
 	                	listyyy = x;
+	                	
+	                	if(!listy.isEmpty())listy.clear();
 	                	for(int i = 0; i < listyyy.size();i++){
-	                   listy.add(listyyy.get(i).pattern);
+	                   listy.add(listyyy.get(i).pattern.toString());
 	                	}
 	                }
 	                
@@ -141,6 +148,65 @@ public class MainController {
 		});
 		
 		
+		final ToggleGroup group = new ToggleGroup();
+		muLambda.setToggleGroup(group);
+		muLambda.setSelected(true);
+		
+		genetic.setToggleGroup(group);
+		
+		muLambda.setUserData("muLambda");
+		genetic.setUserData("genetic");
+		
+		newB.setOnAction(new EventHandler<ActionEvent>(){
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handle(final ActionEvent e){
+				
+				listyyy = new ArrayList<>(initializeRandomPatterns(5, 10));
+				
+				if(!listy.isEmpty())listy.clear();
+				for(int i = 0; i < listyyy.size();i++){
+	                   listy.add(listyyy.get(i).pattern.toString());
+	                	}
+			}
+		});
+		
+		
+		save.setOnAction(new EventHandler<ActionEvent>(){
+			
+			@Override
+			public void handle(final ActionEvent e){
+				
+				saveEvolvedMusic(listyyy);
+			}
+		});
+		
+		evolve.setOnAction(new EventHandler<ActionEvent>(){
+			
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handle(final ActionEvent e){
+				if(group.getSelectedToggle().getUserData().toString() == "muLambda"){
+					int musize = listyyy.size() / 3;
+					int lsize = listyyy.size() - musize;
+					MuLambdaEvolution mul = new MuLambdaEvolution(musize,lsize);
+					PriorityQueue<PatternAndRating> qu = new PriorityQueue<>(listyyy);
+					listyyy = new ArrayList<>(mul.evolvePatterns(qu));
+					if(!listy.isEmpty())listy.clear();
+					for(int i = 0; i < listyyy.size();i++){
+		                   listy.add(listyyy.get(i).pattern.toString());
+		                	}
+				}
+				else if(group.getSelectedToggle().getUserData().toString() == "genetic"){
+					GeneticEvolution ge = new GeneticEvolution();
+					listyyy = ge.evolvePatterns(listyyy);
+					if(!listy.isEmpty())listy.clear();
+					for(int i = 0; i < listyyy.size();i++){
+		                   listy.add(listyyy.get(i).pattern.toString());
+		                	}
+				}
+			}
+		});
 	}
 	
 	 //Returns an empty list if there was an error reading the file
@@ -224,7 +290,7 @@ public class MainController {
 		ArrayList<String> childGenes = new ArrayList<String>();
 		childGenes.addAll(Arrays.asList(inheritedParent1Genes));
 		childGenes.addAll(Arrays.asList(inheritedParent2Genes));
-		int x = childGenes.size();
+	
 		return childGenes.toString();
 	}
 	//mutates the 1/4 randomly selected notes in the pattern
@@ -294,6 +360,25 @@ public class MainController {
 		return NoteDurations.durations[rnd.nextInt(NoteDurations.durations.length)];
 	}
 
+	//Saves the list of music as a .txt file
+    public static void saveEvolvedMusic(List<PatternAndRating> musicList)
+    {
+        try {
+            //NOTE: Overwrites the previously saved evolvedMusicPieces
+            PrintWriter file = new PrintWriter("evolvedMusicPieces.txt", "UTF-8");
+
+            //Add each piece of music as a new line
+            for(PatternAndRating musicPiece : musicList){
+                file.println(musicPiece.pattern.toString() + "," + musicPiece.rating);
+               
+            }
+            file.close();
+        }
+        catch(IOException e)
+        {
+            //Show error message that save was not successful
+        }
+    }
 
 }
 
