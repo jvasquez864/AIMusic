@@ -203,8 +203,16 @@ public class MainController {
 		for (int currentPatternLength = 0; currentPatternLength < patternLength; ++currentPatternLength) {
 			thePattern += createRandomPattern() + " ";
 		}
+		Pattern randomPattern = new Pattern(thePattern);
+		setPatternRandomInstrument(randomPattern);
 
 		return new PatternAndRating(thePattern, -1);
+	}
+
+	private static void setPatternRandomInstrument(Pattern pattern){
+		Random rnd = new Random();
+		//Give voice 0 a random instrument that's not a percussion instrument
+		pattern.setVoice(0).setInstrument(rnd.nextInt(112));
 	}
 
 	//Takes in two patterns, and produces a new string that can be used to make a new pattern.  The new pattern
