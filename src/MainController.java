@@ -62,7 +62,7 @@ public class MainController {
 	private ChoiceBox<Integer> rate3;
 
 	@FXML
-	private ListView<String> table;
+	private ListView<Pattern> table;
 
 	
 	public List<PatternAndRating> listyyy = new ArrayList<>();
@@ -74,11 +74,11 @@ public class MainController {
 	private void initialize(){
 		
 	
-		 ObservableList<String> listy = FXCollections.observableArrayList();
+		 ObservableList<Pattern> listy = FXCollections.observableArrayList();
 		 
 		
 		 
-		 listy.addListener(new ListChangeListener<String>() {
+		 listy.addListener(new ListChangeListener<Pattern>() {
 	            @Override
 	            public void onChanged(@SuppressWarnings("rawtypes") ListChangeListener.Change change) {
 	               
@@ -112,7 +112,7 @@ public class MainController {
 	                	
 	                	if(!listy.isEmpty())listy.clear();
 	                	for(int i = 0; i < listyyy.size();i++){
-	                   listy.add(listyyy.get(i).pattern.toString());
+	                   listy.add(listyyy.get(i).pattern);
 	                	}
 	                }
 	                
@@ -166,7 +166,7 @@ public class MainController {
 				
 				if(!listy.isEmpty())listy.clear();
 				for(int i = 0; i < listyyy.size();i++){
-	                   listy.add(listyyy.get(i).pattern.toString());
+	                   listy.add(listyyy.get(i).pattern);
 	                	}
 			}
 		});
@@ -194,7 +194,7 @@ public class MainController {
 					listyyy = new ArrayList<>(mul.evolvePatterns(qu));
 					if(!listy.isEmpty())listy.clear();
 					for(int i = 0; i < listyyy.size();i++){
-		                   listy.add(listyyy.get(i).pattern.toString());
+		                   listy.add(listyyy.get(i).pattern);
 		                	}
 				}
 				else if(group.getSelectedToggle().getUserData().toString() == "genetic"){
@@ -202,7 +202,7 @@ public class MainController {
 					listyyy = ge.evolvePatterns(listyyy);
 					if(!listy.isEmpty())listy.clear();
 					for(int i = 0; i < listyyy.size();i++){
-		                   listy.add(listyyy.get(i).pattern.toString());
+		                   listy.add(listyyy.get(i).pattern);
 		                	}
 				}
 			}
@@ -298,8 +298,12 @@ public class MainController {
 		ArrayList<String> childGenes = new ArrayList<String>();
 		childGenes.addAll(Arrays.asList(inheritedParent1Genes));
 		childGenes.addAll(Arrays.asList(inheritedParent2Genes));
-	
-		return childGenes.toString();
+
+		String crossOverString = "";
+		for(int i = 0; i < childGenes.size(); ++i){
+			crossOverString += childGenes.get(i) + " ";
+		}
+		return crossOverString;
 	}
 	//mutates the 1/4 randomly selected notes in the pattern
 	public static String mutatePattern(PatternAndRating pattern) {
@@ -314,7 +318,11 @@ public class MainController {
 			thePatternAsArray[rnd.nextInt(thePatternAsArray.length)] = MainController.createRandomPattern();
 		}
 
-		return thePatternAsArray.toString();
+		String mutatedPattern = "";
+		for(int i = 0; i < thePatternAsArray.length; ++i){
+			mutatedPattern += thePatternAsArray[i] + " ";
+		}
+		return mutatedPattern;
 	}
 
 	//Creates a random single pattern, I.E "Cq"
