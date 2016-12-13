@@ -2,13 +2,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Random;
+import java.util.*;
 
 import Constants.Chords;
 import Constants.NoteDurations;
+import com.sun.deploy.util.ArrayUtil;
 import org.jfugue.pattern.Pattern;
 
 import javafx.collections.FXCollections;
@@ -164,6 +162,27 @@ public class MainController {
 		return new PatternAndRating(thePattern, -1);
 	}
 
+	//Takes in two patterns, and produces a new string that can be used to make a new pattern.  The new pattern
+	//is a crossover of both parents.  Both patterns must be of the same length
+	public static String crossoverMutation(PatternAndRating parent1, PatternAndRating parent2){
+		Random rnd = new Random();
+
+		//Get each parents genes as a string[], each index being a single note/chord
+		String[] parent1PatternNotes = parent1.pattern.toString().split(" ");
+		String[] parent2PatternNotes = parent2.pattern.toString().split(" ");
+		int indexToCrossoverAt = rnd.nextInt( parent1PatternNotes.length );
+
+		//Make the child's genes a combination of the parents genes
+		//Arrays.copyOfRange bounds are [x,y) (x is inclusive, y is exclusive)
+		String[] inheritedParent1Genes=  Arrays.copyOfRange(parent1PatternNotes,0,indexToCrossoverAt);
+		String[] inheritedParent2Genes = Arrays.copyOfRange(parent2PatternNotes,indexToCrossoverAt,parent1PatternNotes.length);
+		ArrayList<String> childGenes = new ArrayList<String>();
+		childGenes.addAll(Arrays.asList(inheritedParent1Genes));
+		childGenes.addAll(Arrays.asList(inheritedParent2Genes));
+		int x = childGenes.size();
+		return childGenes.toString();
+	}
+	//mutates the 1/4 randomly selected notes in the pattern
 	public static String mutatePattern(PatternAndRating pattern) {
 		String thePattern = pattern.pattern.toString();
 		//Split by space to get each individual note
@@ -191,7 +210,7 @@ public class MainController {
 		Random rnd = new Random();
 
 		//random number between 0-99;
-		int noteVal = rnd.nextInt(99);
+		int noteVal = rnd.nextInt(100);
 		String patternString = "";
 
 		//pattern will be a note
@@ -214,7 +233,7 @@ public class MainController {
 		Random rnd = new Random();
 
 		//Notes in jFugue can be represented as a random number between 0-127
-		return Integer.toString(rnd.nextInt(127));
+		return Integer.toString(rnd.nextInt(128));
 
 	}
 

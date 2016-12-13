@@ -28,9 +28,7 @@ public class AIMusicMain extends Application{
     public void start(Stage primaryStage) throws IOException{
         //create new Player
         Player musicPlayer = new Player();
-        
-        
-        
+
         Parent root;
         root = FXMLLoader.load(getClass().getResource("mainFX.fxml"));
         Scene scene = new Scene(root);
