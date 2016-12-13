@@ -41,7 +41,7 @@ public class MuLambdaEvolution {
         for (int i = 0; i < lambdaWorstPatterns.size(); ++i) {
             int muIndex = i % mu;
             PatternAndRating patternToChange = new PatternAndRating(muBestPatterns.get(muIndex));
-            patternToChange.pattern = new Pattern(mutatePattern(patternToChange));
+            patternToChange.pattern = new Pattern(MainController.mutatePattern(patternToChange));
             lambdaWorstPatterns.set(i, patternToChange);
         }
 
@@ -51,23 +51,9 @@ public class MuLambdaEvolution {
             mutatedPatterns.add(lambdaWorstPatterns.get(i));
         }
         for (int i = 0; i < muBestPatterns.size(); ++i) {
-            mutatedPatterns.add(lambdaWorstPatterns.get(i));
+            mutatedPatterns.add(muBestPatterns.get(i));
         }
         return mutatedPatterns;
     }
 
-    private String mutatePattern(PatternAndRating pattern) {
-        String thePattern = pattern.pattern.toString();
-        //Split by space to get each individual note
-        String[] thePatternAsArray = thePattern.split(" ");
-
-        Random rnd = new Random();
-
-        //Mutate 1/4 randomly selected notes
-        for (int amountOfNotes = 0; amountOfNotes < thePatternAsArray.length / 4; ++amountOfNotes) {
-            thePatternAsArray[rnd.nextInt(thePatternAsArray.length)] = MainController.createRandomPattern();
-        }
-
-        return thePatternAsArray.toString();
-    }
 }
