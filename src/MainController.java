@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -62,7 +63,19 @@ public class MainController {
 	private ChoiceBox<Integer> rate3;
 
 	@FXML
-	private ListView<Pattern> table;
+  private ListView<Pattern> table;
+
+	
+	@FXML
+	private TextField numOfPatterns;
+	
+	@FXML
+	private TextField lengthOfPatterns;
+	
+	@FXML
+	private TextField nameOfFile;
+
+
 
 	
 	public List<PatternAndRating> listyyy = new ArrayList<>();
@@ -161,9 +174,22 @@ public class MainController {
 			@SuppressWarnings("unchecked")
 			@Override
 			public void handle(final ActionEvent e){
+				String numofpat;
+				String lengthofpat;
+				if(numOfPatterns.getText()!= null){
+					numofpat = numOfPatterns.getText();
+				}
+				else numofpat = "5";
 				
-				listyyy = new ArrayList<>(NoteUtils.initializeRandomPatterns(10, 10));
-				
+
+				if(lengthOfPatterns.getText() != null){
+					lengthofpat = lengthOfPatterns.getText();
+				}
+				else lengthofpat = "10";
+				listyyy = new ArrayList<>(NoteUtils.initializeRandomPatterns(Integer.parseInt(numofpat), Integer.parseInt(lengthofpat)));
+				numOfPatterns.clear();
+				lengthOfPatterns.clear();
+
 				if(!listy.isEmpty())listy.clear();
 				for(int i = 0; i < listyyy.size();i++){
 	                   listy.add(listyyy.get(i).getEntirePattern());
@@ -176,8 +202,13 @@ public class MainController {
 			
 			@Override
 			public void handle(final ActionEvent e){
-				
-				saveEvolvedMusic(listyyy);
+				if(nameOfFile.getText() != null){
+				saveEvolvedMusic(listyyy, nameOfFile.getText()+".txt");
+				}
+				else{
+					saveEvolvedMusic(listyyy,"evolvedMusicPieces.txt");
+				}
+				nameOfFile.clear();
 			}
 		});
 		
@@ -257,11 +288,11 @@ public class MainController {
 
 
 	//Saves the list of music as a .txt file
-    public static void saveEvolvedMusic(List<PatternAndRating> musicList)
+    public static void saveEvolvedMusic(List<PatternAndRating> musicList, String fileName)
     {
         try {
             //NOTE: Overwrites the previously saved evolvedMusicPieces
-            PrintWriter file = new PrintWriter("evolvedMusicPieces.txt", "UTF-8");
+            PrintWriter file = new PrintWriter(fileName, "UTF-8");
 
             //Add each piece of music as a new line
             for(PatternAndRating musicPiece : musicList){
