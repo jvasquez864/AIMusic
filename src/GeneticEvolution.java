@@ -9,7 +9,7 @@ public class GeneticEvolution {
 
         int parent1Index = rnd.nextInt(patterns.size());
         int parent2Index = rnd.nextInt(patterns.size());
-        String childPattern = NoteUtils.crossoverMutation(patterns.get(parent1Index), patterns.get(parent2Index));
+        String childPattern = NoteUtils.crossoverMutationEntirePattern(patterns.get(parent1Index), patterns.get(parent2Index));
 
         //Get random int from 0-99. If it's less than 5, mutate the child's genes (5% chance of mutation)
         childPattern = rnd.nextInt(100) < 5 ?
