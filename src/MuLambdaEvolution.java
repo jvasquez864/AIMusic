@@ -41,7 +41,7 @@ public class MuLambdaEvolution {
         for (int i = 0; i < lambdaWorstPatterns.size(); ++i) {
             int muIndex = i % mu;
             PatternAndRating patternToChange = new PatternAndRating(muBestPatterns.get(muIndex));
-            patternToChange.pattern = new Pattern(MainController.mutatePattern(patternToChange));
+            patternToChange.pattern = new Pattern(NoteUtils.mutateEntirePattern(patternToChange));
             lambdaWorstPatterns.set(i, patternToChange);
         }
 
