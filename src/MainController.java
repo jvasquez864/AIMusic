@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-import Constants.Chords;
 import Constants.NoteDurations;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
