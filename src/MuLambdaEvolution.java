@@ -1,6 +1,5 @@
 import java.util.*;
 
-import Constants.Chords;
 import Constants.NoteDurations;
 import org.jfugue.pattern.Pattern;
 
